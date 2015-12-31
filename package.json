@@ -1,0 +1,17 @@
+{
+  "name": "chat-angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Pedro H.S",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "engines": {
+    "node": "0.12.7"
+  }
+}
