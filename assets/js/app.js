@@ -16,7 +16,7 @@ app.controller('chatCtrl', function($scope, $firebaseArray){
 
 				$scope.mensagens = $firebaseArray(ref);
 				var data = authData.facebook;
-				$scope.user = {id: data.id, name: data.displayName, picture: data.profileImageURL,};
+				$scope.user = {id: data.id, name: data.displayName, picture: data.profileImageURL};
 			});
 		}
 	});
@@ -26,7 +26,7 @@ app.controller('chatCtrl', function($scope, $firebaseArray){
 		if(e.keyCode == 13){
 			if($scope.mensagem.length >= 1){
 				$scope.user.mensagem = $scope.mensagem;
-			$scope.mensagens.$add($scope.user).then(function(){
+				$scope.mensagens.$add($scope.user).then(function(){
 				$scope.mensagem = "";
 			});
 			}
