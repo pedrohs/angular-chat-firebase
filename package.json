@@ -4,11 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "bower install"
   },
   "author": "Pedro H.S",
   "license": "ISC",
   "dependencies": {
+    "bower": "^1.7.2",
     "express": "^4.13.3"
   },
   "engines": {
