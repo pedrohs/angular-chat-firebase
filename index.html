@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Chat</title>
+	<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/bower_components/bootstrap-social/bootstrap-social.css">
+	<link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body ng-app="appChat" ng-controller="chatCtrl">
+	<div id="login" class="box" ng-hide="user">
+		<h1>Chat</h1>
+		<button ng-click="login()" class="btn btn-social btn-facebook btn-lg">
+			<span class="fa fa-facebook"></span> Entrar com o Facebook
+		</button>
+
+		<div ng-show="error" class="alert alert-danger">
+			<strong>Erro!</strong> Não foi possivel efetuar o login
+		</div>
+	</div>
+	<div id="chat" class="box" ng-show="user">
+		<div id="mensagens">
+
+			<div ng-repeat="mensagem in mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
+				<div class="imgProfile">
+					<img ng-src="{{mensagem.picture}}" alt="{{mensagem.name}}">
+				</div>
+				<ul>
+					<li class="text-primary">{{mensagem.name}}</li>
+					<li class="text-muted">{{mensagem.mensagem}}</li>
+				</ul>
+			</div>
+		</div>
+		<div id="campos">
+			<input type="text" placeholder="Enter para enviar" class="form-control" ng-keyup="enviar($event)" ng-model="user.mensagem">
+		</div>
+	</div>
+
+	<!--Scripts-->
+	<script src="assets/bower_components/firebase/firebase.js"></script>
+	<script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+	<script src="assets/bower_components/angular/angular.min.js"></script>
+	<script src="assets/bower_components/angularfire/dist/angularfire.min.js"></script>
+
+	<script src="assets/js/app.js"></script>
+</body>
+</html>
