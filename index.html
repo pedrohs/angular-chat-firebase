@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="appChat" ng-controller="chatCtrl">
 <head>
 	<meta charset="utf-8">
-	<title>Chat</title>
+	<title>{{titleAlert}}Chat</title>
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-app="appChat" ng-controller="chatCtrl">
+<body>
+	<!--Box Login-->
 	<div id="login" class="box" ng-hide="user">
 		<h1>Chat</h1>
 		<button ng-click="login()" class="btn btn-social btn-facebook btn-lg">
@@ -19,9 +20,10 @@
 			<strong>Erro!</strong> Não foi possivel efetuar o login
 		</div>
 	</div>
-	<div id="chat" class="box" ng-show="user">
 
-		<!--Box Mensagens-->
+	<!--Box Chat-->
+	<div id="chat" class="box" ng-show="user" ng-mouseover="teste()">
+		
 		<div id="mensagens" scroll="mensagens">
 	
 			<div ng-repeat="mensagem in mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
