@@ -2,7 +2,7 @@ var app = angular.module('appChat', ['firebase']);
 
 app.controller('chatCtrl', function($scope, $firebaseArray, $window){
 	var ref = new Firebase("https://tvchat.firebaseio.com");
-	
+
 	$scope.error = false;
 	$scope.mensagem = "";
 
@@ -32,7 +32,7 @@ app.controller('chatCtrl', function($scope, $firebaseArray, $window){
 					$scope.mensagem = "";
 				});
 			}
-			
+
 		}
 	};
 
@@ -43,7 +43,7 @@ app.controller('chatCtrl', function($scope, $firebaseArray, $window){
 				qntMensagens++;
 				$scope.titleAlert = "(" + qntMensagens + ")";
 			});
-			
+
 		};
 		$window.onfocus = function(){
 			$scope.$apply(function(){
@@ -55,7 +55,7 @@ app.controller('chatCtrl', function($scope, $firebaseArray, $window){
 	}
 	/*
 	function notification(){
-		var qntMensagens = 0;		
+		var qntMensagens = 0;
 		$scope.mensagens.$watch(function(){
 
 			$window.onblur = function(){
@@ -63,13 +63,13 @@ app.controller('chatCtrl', function($scope, $firebaseArray, $window){
 					qntMensagens++;
 					$scope.titleAlert = "(" + qntMensagens + ")";
 				});
-				
+
 			};
 			$window.onfocus = function(){
 				$scope.$apply(function(){
 					qntMensagens = 0;
 					$scope.titleAlert = "";
-				});				
+				});
 			};
 		});
 

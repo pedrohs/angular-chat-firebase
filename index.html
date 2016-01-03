@@ -23,9 +23,9 @@
 
 	<!--Box Chat-->
 	<div id="chat" class="box" ng-show="user" ng-mouseover="teste()">
-		
+
 		<div id="mensagens" scroll="mensagens">
-	
+
 			<div ng-repeat="mensagem in mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
 				<div class="imgProfile">
 					<img ng-src="{{mensagem.picture}}" alt="{{mensagem.name}}">
