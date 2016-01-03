@@ -1,4 +1,4 @@
-app.directive('scroll', function(){
+function scrollDirective(){
 	return {
 		restrict: 'A',
 		link: function(scope, element, attr){
@@ -7,4 +7,4 @@ app.directive('scroll', function(){
 			});
 		}
 	}
-});
+};

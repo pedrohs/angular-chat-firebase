@@ -8,39 +8,38 @@
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-controller="chatCtrl as vm">
-{{ vm }}
+<body ng-controller="ChatController as chat">
 	<!--Box Login-->
-	<div id="login" class="box" ng-hide="vm.user">
+	<div id="login" class="box" ng-hide="chat.user">
 		<h1>Chat</h1>
-		<button ng-click="vm.login()" class="btn btn-social btn-facebook btn-lg">
+		<button ng-click="chat.login()" class="btn btn-social btn-facebook btn-lg">
 			<span class="fa fa-facebook"></span> Entrar com o Facebook
 		</button>
 
-		<div ng-show="vm.error" class="alert alert-danger">
+		<div ng-show="chat.error" class="alert alert-danger">
 			<strong>Erro!</strong> Não foi possivel efetuar o login
 		</div>
 	</div>
 
 	<!--Box Chat-->
-	<div id="chat" class="box" ng-show="vm.user">
+	<div id="chat" class="box" ng-show="chat.user">
 
-		<div id="mensagens" scroll="vm.mensagens">
+		<div id="messages" scroll="chat.messages">
 
-			<div ng-repeat="mensagem in vm.mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
+			<div ng-repeat="message in chat.messages" ng-class="(message.id == chat.user.id) ? 'message-right' : 'message-left'">
 				<div class="imgProfile">
-					<img ng-src="{{mensagem.picture}}" alt="{{mensagem.name}}">
+					<img ng-src="{{message.picture}}" alt="{{message.name}}">
 				</div>
 				<ul>
-					<li class="text-primary">{{mensagem.name}}</li>
-					<li class="text-muted">{{mensagem.mensagem}}</li>
+					<li class="text-primary">{{message.name}}</li>
+					<li class="text-muted">{{message.message}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<!--Input-->
 		<div id="campo">
-			<input type="text" placeholder="Enter para enviar" class="form-control" ng-keyup="vm.enviar($event)" ng-model="vm.mensagem">
+			<input type="text" placeholder="Enter para enviar" class="form-control" ng-keyup="chat.send($event)" ng-model="chat.message">
 		</div>
 	</div>
 
@@ -49,8 +48,8 @@
 	<script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angularfire/dist/angularfire.min.js"></script>
-
-	<script src="js/app.js"></script>
+	
 	<script src="js/directivas/scroll.js"></script>
+	<script src="js/app.js"></script>	
 </body>
 </html>
