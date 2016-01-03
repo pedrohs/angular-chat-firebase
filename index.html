@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="appChat" ng-controller="chatCtrl">
+<html ng-app="appChat">
 <head>
 	<meta charset="utf-8">
-	<title>{{titleAlert}}Chat</title>
+	<title>{{titleAlert || ''}}Chat</title>
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body ng-controller="chatCtrl as vm">
+{{ vm }}
 	<!--Box Login-->
-	<div id="login" class="box" ng-hide="user">
+	<div id="login" class="box" ng-hide="vm.user">
 		<h1>Chat</h1>
-		<button ng-click="login()" class="btn btn-social btn-facebook btn-lg">
+		<button ng-click="vm.login()" class="btn btn-social btn-facebook btn-lg">
 			<span class="fa fa-facebook"></span> Entrar com o Facebook
 		</button>
 
-		<div ng-show="error" class="alert alert-danger">
+		<div ng-show="vm.error" class="alert alert-danger">
 			<strong>Erro!</strong> Não foi possivel efetuar o login
 		</div>
 	</div>
 
 	<!--Box Chat-->
-	<div id="chat" class="box" ng-show="user" ng-mouseover="teste()">
+	<div id="chat" class="box" ng-show="vm.user">
 
-		<div id="mensagens" scroll="mensagens">
+		<div id="mensagens" scroll="vm.mensagens">
 
-			<div ng-repeat="mensagem in mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
+			<div ng-repeat="mensagem in vm.mensagens" ng-class="(mensagem.id == user.id) ? 'mensagem-right' : 'mensagem-left'">
 				<div class="imgProfile">
 					<img ng-src="{{mensagem.picture}}" alt="{{mensagem.name}}">
 				</div>
@@ -39,7 +40,7 @@
 
 		<!--Input-->
 		<div id="campo">
-			<input type="text" placeholder="Enter para enviar" class="form-control" ng-keyup="enviar($event)" ng-model="mensagem">
+			<input type="text" placeholder="Enter para enviar" class="form-control" ng-keyup="vm.enviar($event)" ng-model="vm.mensagem">
 		</div>
 	</div>
 
