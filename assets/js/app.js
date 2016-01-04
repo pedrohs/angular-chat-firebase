@@ -1,10 +1,10 @@
 'use strict';
 angular
-	.module('appChat', ['firebase'])
+	.module('appChat', ['firebase', 'ngAudio'])
 	.controller('ChatController', ChatController)
 	.directive('scroll', scrollDirective);
 
-function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window){
+function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAudio){
 	var vm = this;
 	var ref = new Firebase('https://tvchat.firebaseio.com');
 	var not = 0;
@@ -39,6 +39,7 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window){
 
 	function startNotification(){
 		if(vm.user){
+			vm.soundPop = ngAudio.load("../mp3/pop.mp3");
 			vm.messages.$watch(function(data){
 				if(data.event == 'child_added'){
 					$rootScope.$emit('chat.new_message');
@@ -77,6 +78,7 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window){
 
 	$rootScope.$on('chat.new_message', function(){
 		if(!focus){
+			vm.soundPop.play("../mp3/pop.mp3");
 			not++;
 			$rootScope.titleAlert = "(" + not + ")";
 		}else{

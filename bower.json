@@ -21,6 +21,7 @@
     "angular": "~1.4.8",
     "angularfire": "~1.1.3",
     "bootstrap": "~3.3.6",
-    "bootstrap-social": "~4.11.0"
+    "bootstrap-social": "~4.11.0",
+    "angular-audio": "ngAudio#~1.7.1"
   }
 }
