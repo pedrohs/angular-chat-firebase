@@ -8,7 +8,7 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 	var vm = this;
 	var ref = new Firebase('https://tvchat.firebaseio.com');
 	var not = 0;
-	var focus;
+	var focus = true;
 
 	vm.user = undefined;
 	vm.error = false;
@@ -54,15 +54,12 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 			focus = true;
 
 			if(not != 0){
-				console.log("limpar");
 				$rootScope.$emit('chat.focus');
 			}
 		}
 		$window.onblur = function(){
 			focus = false;
 		}
-
-		return focus;
 	}
 
 	$rootScope.$on('auth.successful', function(event, data){
@@ -77,10 +74,11 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 	});
 
 	$rootScope.$on('chat.new_message', function(){
+		console.log(focus);
 		if(!focus){
-			vm.soundPop.play("../mp3/pop.mp3");
 			not++;
 			$rootScope.titleAlert = "(" + not + ")";
+			vm.soundPop.play("../mp3/pop.mp3");
 		}else{
 			not = 0;
 			$rootScope.titleAlert = "";
