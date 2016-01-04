@@ -5,10 +5,10 @@ angular
 	.directive('scroll', scrollDirective);
 
 function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAudio){
-	var vm = this;
-	var ref = new Firebase('https://tvchat.firebaseio.com');
-	var not = 0;
-	var focus = true;
+	var vm = this,
+		ref = new Firebase('https://tvchat.firebaseio.com'),
+		not = 0,
+		focus = true;
 
 	vm.user = undefined;
 	vm.error = false;
@@ -21,7 +21,7 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 			var user = {id: data.id, name: data.displayName, picture: data.profileImageURL};
 
 			$rootScope.$emit('auth.successful', user);
-		}).catch(function(err){
+		}).catch(function(){
 			$rootScope.$emit('auth.failed');
 		});
 	};
@@ -31,9 +31,8 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 			var data = angular.copy(vm.user);
 
 			data.message = vm.message;
-			vm.messages.$add(data).then(function(){
-				vm.message = '';
-			});
+			vm.message = '';
+			vm.messages.$add(data);
 		}
 	};
 
@@ -53,13 +52,13 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 		$window.onfocus = function(){
 			focus = true;
 
-			if(not != 0){
+			if(not !== 0){
 				$rootScope.$emit('chat.focus');
 			}
-		}
+		};
 		$window.onblur = function(){
 			focus = false;
-		}
+		};
 	}
 
 	$rootScope.$on('auth.successful', function(event, data){
@@ -69,12 +68,11 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 		startNotification();
 	});
 
-	$rootScope.$on('auth.failed', function(event){
+	$rootScope.$on('auth.failed', function(){
 		vm.error = true;
 	});
 
 	$rootScope.$on('chat.new_message', function(){
-		console.log(focus);
 		if(!focus){
 			not++;
 			$rootScope.titleAlert = "(" + not + ")";
@@ -91,4 +89,4 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 			$rootScope.titleAlert = "";
 		});
 	});
-};
+}
