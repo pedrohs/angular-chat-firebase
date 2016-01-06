@@ -28,17 +28,21 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 
 	vm.send = function(event){
 		if(event.keyCode == 13 && vm.message.length >= 1){
-			var data = angular.copy(vm.user);
+			if(vm.message.length < 190){
+				var data = angular.copy(vm.user);
 
-			data.message = vm.message;
-			vm.message = '';
-			vm.messages.$add(data);
+				data.message = vm.message;
+				vm.message = '';
+				vm.messages.$add(data);
+			}else{
+				vm.maxMsg = true;
+			}
 		}
 	};
 
 	function startNotification(){
 		if(vm.user){
-			vm.soundPop = ngAudio.load("../mp3/pop.mp3");
+			vm.soundPop = ngAudio.load("../mp3/pop.ogg");
 			vm.messages.$watch(function(data){
 				if(data.event == 'child_added'){
 					$rootScope.$emit('chat.new_message');
@@ -76,11 +80,11 @@ function ChatController($rootScope, $firebaseAuth, $firebaseArray, $window, ngAu
 		if(!focus){
 			not++;
 			$rootScope.titleAlert = "(" + not + ")";
-			vm.soundPop.play("../mp3/pop.mp3");
+			vm.soundPop.play();
 		}else{
 			not = 0;
 			$rootScope.titleAlert = "";
-		}		
+		}
 	});
 
 	$rootScope.$on('chat.focus', function(){

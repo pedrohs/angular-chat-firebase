@@ -27,6 +27,11 @@ body {
 #chat {
 	height: 500px;
 }
+#alertMaxMsg {
+	position: absolute;
+	bottom: 14px;
+	width: 100%;
+}
 #messages {
 	width: 100%;
 	height: 466px;
